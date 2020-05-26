@@ -1,11 +1,15 @@
 import React from 'react'
 import Pokemon from './Pokemon'
 
-export default function PokemonList({ pokemon }) {
+export default function PokemonList({ name }) {
+    let pokemonListStyle = {
+        display: 'flex',
+        flexWrap: 'wrap',
+    }
     return (
-        <div>
-            {pokemon.map(p => ( 
-                <Pokemon key={p} pokemon = {p}/>
+        <div style={pokemonListStyle}>
+            {name.map(p => ( 
+                <Pokemon key={p} name = {p}/>
             ))}
         </div>
     )

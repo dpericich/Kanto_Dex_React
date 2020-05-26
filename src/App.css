@@ -1,0 +1,31 @@
+. {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.Header {
+    background-color: #ee1515;
+    color: #ffcb05;
+    text-align: center;
+    border-bottom: solid black 10px;
+    font-size: 50px;
+    padding: 10px 0 15px 0;
+    font-family: Pokemon;
+    text-shadow: 1.5px 2px #2a75bb;
+
+}
+   
+
+.Footer {
+    border-top: solid black 10px;
+    background-color: lightgrey;
+}
+
+.Main {
+    margin: 10px 0 10px 0;
+}
+
+.Pagination {
+    text-align: center;
+}

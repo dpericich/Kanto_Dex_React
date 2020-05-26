@@ -5,7 +5,9 @@ import Pagination from './Pagination'
 import axios from 'axios'
   
 function App() {
-  const [pokemon, setPokemon] = useState([])
+  const [name, setName] = useState([])
+  const [sprite, setSprite] = useState([])
+  const [links, setLink] = useState([])
   const [currentPageUrl, setCurrentPageUrl] = useState('https://pokeapi.co/api/v2/pokemon')
   const [nextPageUrl, setNextPageUrl] = useState()
   const [prevPageUrl, setPrevPageUrl] = useState()
@@ -20,8 +22,17 @@ function App() {
       setLoading(false)
       setNextPageUrl(res.data.next)
       setPrevPageUrl(res.data.previous)
-      setPokemon(res.data.results.map(p => p.name))
+      setName(res.data.results.map(p => p.name))
+      setLink(res.data.results.map(p => p.url))
     })
+    console.log(links)
+
+    links.map(link => (axios.get(link).then(res => {
+      setSprite(res.data.sprites.front_shiny)
+    })))
+
+    console.log(sprite)
+
 
     return() => cancel()
 
@@ -38,13 +49,21 @@ function App() {
   if (loading) return "Loading..."
 
   return (
-    <>
-      <PokemonList pokemon={pokemon} />
-      <Pagination
-        gotoNextPage={nextPageUrl ? gotoNextPage : null}
-        gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
-      />
-    </>
+    <div>
+      <div className="Header">
+        Kanto Dex
+      </div>
+      <div className="Main">
+        <PokemonList name={name}/>
+        <div className="Pagination">
+          <Pagination
+            gotoNextPage={nextPageUrl ? gotoNextPage : null}
+            gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
+          />
+        </div>
+      </div>
+      <div className="Footer"></div>
+    </div>
   );
 }
 
